@@ -30,7 +30,7 @@ This section guides you through submitting an enhancement suggestion, including 
 - Update the documentation (like the `README.md`) if your pull request introduces a breaking pipeline change or adds a new feature.
 
 ## 👥 Contributors & HUMYNEX ROBOTICS
-All contributors agree to abide by the Code of Conduct and to be friendly and professional in raising issues. We look forward to building wonderful projects alongside you and all our amazing friends!
+All contributors agree to abide by the Code of Conduct and to be friendly and professional in raising issues. We look forward to building wonderful projects alongside you, our dedicated team, and the open-source community!
 
 ---
 *(c) HUMYNEX ROBOTICS*

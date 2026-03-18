@@ -96,19 +96,18 @@ This workspace incorporates several key ROS 2 and hardware packages:
 ---
 
 ## 🤝 Contribution Guidelines
-We welcome all changes and additions! This is an open-source project managed by HUMYNEX ROBOTICS and friends. 
+We welcome all changes and additions! This is an open-source project managed by the HUMYNEX ROBOTICS team. 
 Please refer to our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how you can help test on new hardware, fix bugs, or add features.
 
 ---
 
-## 👥 Company & Friends (Contributors)
+## 👥 Company & Team (Contributors)
 
 **🏢 Company Name:** HUMYNEX ROBOTICS  
 *Mission: Make your ideas into reality.*
 
-**🌟 Special Thanks:**
-A huge shoutout to our amazing friends and the entire open-source robotics community who helped make this project possible!
-- *[Your Friend's Name / Tag]* (Let us know if you want a specific friend mentioned!)
+**🌟 Core Team & Special Thanks:**
+A special shoutout to the co-founders, the dedicated HUMYNEX ROBOTICS team, and the entire open-source robotics community who help make this project possible!
 - Want your name here? Feel free to open a Pull Request!
 
 &copy; 2026 HUMYNEX ROBOTICS. All rights reserved.
