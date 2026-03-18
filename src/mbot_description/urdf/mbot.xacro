@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<!-- 
+  🏢 Developed by HUMYNEX ROBOTICS
+  ⚖️ Copyright: (c) 2026 HUMYNEX ROBOTICS. All rights reserved.
+  📧 Contact: humynexrobotics@gmail.com | +91 8714358646
+-->
+<robot name="mbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find mbot_description)/urdf/materials.xacro" />
+
+<link name="base_footprint"/>
+<joint name="base_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.00284967111315094 0.00019217625061831 0.1364710422860175" rpy="0 0 0"/>
+    <mass value="2.917350580966256"/>
+    <inertia ixx="0.013161" iyy="0.005216" izz="0.018272" ixy="3.1e-05" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="cyan"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_left_wheel_1">
+  <inertial>
+    <origin xyz="0.14882337797264744 -0.08743111065872872 -0.15848924541749176" rpy="0 0 0"/>
+    <mass value="0.5352307065248498"/>
+    <inertia ixx="0.000808" iyy="0.001256" izz="0.000812" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.282453 -0.244241 -0.220256" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/rear_left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0.282453 -0.244241 -0.220256" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/rear_left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_right_wheel_1">
+  <inertial>
+    <origin xyz="0.14882434661686864 -0.16616823391426058 -0.15890097996488106" rpy="0 0 0"/>
+    <mass value="0.5352307065248498"/>
+    <inertia ixx="0.000808" iyy="0.001256" izz="0.000812" ixy="0.0" iyz="-0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.282458 -0.009359 -0.220257" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/rear_right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0.282458 -0.009359 -0.220257" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/rear_right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_left_wheel_1">
+  <inertial>
+    <origin xyz="0.14882587119445223 -0.0874312397994979 -0.1584888308152344" rpy="0 0 0"/>
+    <mass value="0.5352307065248498"/>
+    <inertia ixx="0.000808" iyy="0.001256" izz="0.000812" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.015247 -0.244241 -0.220254" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/front_left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0.015247 -0.244241 -0.220254" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/front_left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_right_wheel_1">
+  <inertial>
+    <origin xyz="0.1488194636228566 -0.16616789675663227 -0.15890140097612748" rpy="0 0 0"/>
+    <mass value="0.5352307065248498"/>
+    <inertia ixx="0.000808" iyy="0.001256" izz="0.000812" ixy="0.0" iyz="-0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.015241 -0.009358 -0.220256" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/front_right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0.015241 -0.009358 -0.220256" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/front_right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="8.402447596823903e-05 -9.41552620599348e-05 0.013718351026483333" rpy="0 0 0"/>
+    <mass value="0.2536750031500938"/>
+    <inertia ixx="0.000111" iyy="0.000111" izz="0.000156" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.038214 0.038166 -0.159258" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="teal"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.038214 0.038166 -0.159258" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://mbot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="rear_left_wheel_joint" type="continuous">
+  <origin xyz="-0.282453 0.244241 0.220256" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rear_left_wheel_1"/>
+  <axis xyz="-2.9e-05 -1.0 1.2e-05"/>
+</joint>
+
+<joint name="rear_right_wheel_joint" type="continuous">
+  <origin xyz="-0.282458 0.009359 0.220257" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rear_right_wheel_1"/>
+  <axis xyz="4.5e-05 -1.0 1.7e-05"/>
+</joint>
+
+<joint name="front_left_wheel_joint" type="continuous">
+  <origin xyz="-0.015247 0.244241 0.220254" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_left_wheel_1"/>
+  <axis xyz="-7.1e-05 -1.0 1.7e-05"/>
+</joint>
+
+<joint name="front_right_wheel_joint" type="continuous">
+  <origin xyz="-0.015241 0.009358 0.220256" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_right_wheel_1"/>
+  <axis xyz="-8e-05 -1.0 3e-06"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.038214 -0.038166 0.159258" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+</robot>
