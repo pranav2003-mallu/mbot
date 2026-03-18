@@ -86,7 +86,29 @@ ros2 launch mbot_description navigation.launch.py map:=/path/to/map.yaml serial_
 
 ---
 
-## 🏢 Company Details & Copyright
+## 📦 Packages
+This workspace incorporates several key ROS 2 and hardware packages:
+- **`mbot_description`**: Core robot package with URDF, launch files, and `robot_bridge.py`.
+- **`rplidar_ros`**: Official Lidar driver adapted for unified 2D SLAM.
+- **`nav2_bringup` & `slam_toolbox`**: Handled via standard launch parameters for mapping and autonomous navigation.
+- **`teleop_twist_keyboard`**: Keyboard teleoperation node for easy manual control.
 
-**Company Name:** HUMYNEX ROBOTICS  
+---
+
+## 🤝 Contribution Guidelines
+We welcome all changes and additions! This is an open-source project managed by HUMYNEX ROBOTICS and friends. 
+Please refer to our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how you can help test on new hardware, fix bugs, or add features.
+
+---
+
+## 👥 Company & Friends (Contributors)
+
+**🏢 Company Name:** HUMYNEX ROBOTICS  
+*Mission: Make your ideas into reality.*
+
+**🌟 Special Thanks:**
+A huge shoutout to our amazing friends and the entire open-source robotics community who helped make this project possible!
+- *[Your Friend's Name / Tag]* (Let us know if you want a specific friend mentioned!)
+- Want your name here? Feel free to open a Pull Request!
+
 &copy; 2026 HUMYNEX ROBOTICS. All rights reserved.
