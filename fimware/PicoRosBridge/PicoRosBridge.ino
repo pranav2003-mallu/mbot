@@ -7,9 +7,17 @@
 
 // Status LEDs
 #define ONBOARD_LED LED_BUILTIN
-#define EXTRA_LED 28
+#define EXTRA_LED 27  // Changed to 27
 unsigned long next_blink_time = 0;
 bool led_state = false;
+
+// Relay Modules for LED strips
+// Suggest using 20 and 21 (or any unused free GPIOs)
+#define RELAY1_PIN 20
+#define RELAY2_PIN 21
+unsigned long next_relay_blink_time = 0;
+bool relay_blink_state = false;
+
 
 #include "commands.h"
 #include "sensors.h"
@@ -150,6 +158,12 @@ void setup() {
   // Initialize LED pins
   pinMode(ONBOARD_LED, OUTPUT);
   pinMode(EXTRA_LED, OUTPUT);
+  
+  // Initialize Relay pins
+  pinMode(RELAY1_PIN, OUTPUT);
+  pinMode(RELAY2_PIN, OUTPUT);
+  digitalWrite(RELAY1_PIN, LOW); // Start with strips off
+  digitalWrite(RELAY2_PIN, LOW);
 
 #ifdef USE_BASE
   initEncoders();
@@ -159,13 +173,56 @@ void setup() {
 }
 
 void loop() {
+  unsigned long current_time = millis();
+
   // Heartbeat LED indication (toggles every 500ms)
-  if (millis() >= next_blink_time) {
+  if (current_time >= next_blink_time) {
     led_state = !led_state;
     digitalWrite(ONBOARD_LED, led_state);
     digitalWrite(EXTRA_LED, led_state);
-    next_blink_time = millis() + 500;
+    next_blink_time = current_time + 500;
   }
+
+  // Relay blinking pulse (toggles every 500ms)
+  if (current_time >= next_relay_blink_time) {
+    relay_blink_state = !relay_blink_state;
+    next_relay_blink_time = current_time + 500;
+  }
+
+#ifdef USE_BASE
+  // Update relay strips based on robot states (Idle, Forward, Backward, Turning)
+  if (moving == 0) {
+    // Idle state: LED Strips off
+    digitalWrite(RELAY1_PIN, LOW);
+    digitalWrite(RELAY2_PIN, LOW);
+  } else {
+    // Determine movement direction from PID targets
+    long L_spd = leftPID.TargetTicksPerFrame;
+    long R_spd = rightPID.TargetTicksPerFrame;
+    
+    if (L_spd > 0 && R_spd > 0) {
+      // Moving Forward: Both Strips Solid On
+      digitalWrite(RELAY1_PIN, HIGH);
+      digitalWrite(RELAY2_PIN, HIGH);
+    } else if (L_spd < 0 && R_spd < 0) {
+      // Moving Backward: Both Strips Blinking (Warning)
+      digitalWrite(RELAY1_PIN, relay_blink_state);
+      digitalWrite(RELAY2_PIN, relay_blink_state);
+    } else if (L_spd <= 0 && R_spd > 0) {
+      // Turning Left: Left blink, Right solid
+      digitalWrite(RELAY1_PIN, relay_blink_state);
+      digitalWrite(RELAY2_PIN, HIGH);
+    } else if (L_spd > 0 && R_spd <= 0) {
+      // Turning Right: Right blink, Left solid
+      digitalWrite(RELAY1_PIN, HIGH);
+      digitalWrite(RELAY2_PIN, relay_blink_state);
+    } else {
+      // Failsafe condition
+      digitalWrite(RELAY1_PIN, HIGH);
+      digitalWrite(RELAY2_PIN, HIGH);
+    }
+  }
+#endif
 
   while (Serial.available() > 0) {
     chr = Serial.read();
