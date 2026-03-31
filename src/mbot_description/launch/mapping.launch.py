@@ -62,13 +62,6 @@ def generate_launch_description():
         ),
         
         Node(
-            package='teleop_twist_keyboard',
-            executable='teleop_twist_keyboard',
-            prefix='xterm -e',
-            output='screen'
-        ),
-
-        Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',

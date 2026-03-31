@@ -63,12 +63,12 @@ def generate_launch_description():
             launch_arguments={'serial_port': lidar_port, 'frame_id': 'laser'}.items()
         ),
 
-        # 4. Scan Filter (180 Crop)
-        Node(
-            package='mbot_description',
-            executable='scan_filter.py',
-            name='scan_filter'
-        ),
+        # 4. Scan Filter (180 Crop) - Currently missing, commented out to prevent crash
+        # Node(
+        #     package='mbot_description',
+        #     executable='scan_filter.py',
+        #     name='scan_filter'
+        # ),
 
         # 5. Nav2 Bringup
         IncludeLaunchDescription(
