@@ -1,46 +1,34 @@
 # PicoRosBridge for Skid-Steer Mobile Robot
 
-This firmware is a complete adaptation of the ROS Arduino Bridge for the Raspberry Pi Pico, specially modified for a 4-wheel skid-steer robot using two L298N motor drivers.
+This firmware is a complete adaptation of the ROS Arduino Bridge for the Raspberry Pi Pico, specially modified for a 4-wheel skid-steer robot using an MDD20A Dual Channel Motor Driver.
 
 ## Hardware Configuration
 This code handles:
 * **4 x L-shape Waveshare 12V gear motors**
-* **2 x L298N motor drivers**
+* **1 x MDD20A motor driver**
 * **2 rear wheel encoders**
 * **Communication via Serial over USB** to ROS 2 Humble.
 
 ### Pi Pico Pin Mapping
 
-#### Motors (L298N x 2)
-The Pico controls all 4 motors.
-**Left-Side L298N:**
-- LF (Left-Front) Motor:
-  - `PWM` (ENA): Pin 6
-  - `IN1`: Pin 7
-  - `IN2`: Pin 8
-- LR (Left-Rear) Motor:
-  - `PWM` (ENB): Pin 9
-  - `IN1`: Pin 10
-  - `IN2`: Pin 11
+#### Motors (MDD20A)
+The Pico controls the motors using PWM and DIR pins.
+**Left Motors Channel (M1):**
+- `PWM 1`: Pin 2
+- `DIR 1`: Pin 3
 
-**Right-Side L298N:**
-- RF (Right-Front) Motor:
-  - `PWM` (ENA): Pin 12
-  - `IN1`: Pin 13
-  - `IN2`: Pin 14
-- RR (Right-Rear) Motor:
-  - `PWM` (ENB): Pin 15
-  - `IN1`: Pin 16
-  - `IN2`: Pin 17
+**Right Motors Channel (M2):**
+- `PWM 2`: Pin 8
+- `DIR 2`: Pin 9
 
 #### Encoders
 Encoders use hardware interrupts for high-speed tracking.
 - **Left Rear Encoder**
-  - Channel A: Pin 2
-  - Channel B: Pin 3
+  - Channel A: Pin 14
+  - Channel B: Pin 15
 - **Right Rear Encoder**
-  - Channel A: Pin 4
-  - Channel B: Pin 5
+  - Channel A: Pin 16
+  - Channel B: Pin 17
   *(Note: The firmware automatically handles the inverted counting on the right side based on your requirement)*.
 
 ## ROS 2 Integration Parameters
