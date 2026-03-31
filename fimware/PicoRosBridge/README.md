@@ -31,6 +31,22 @@ Encoders use hardware interrupts for high-speed tracking.
   - Channel B: Pin 17
   *(Note: The firmware automatically handles the inverted counting on the right side based on your requirement)*.
 
+#### Status LEDs and Relays (Indicators)
+The firmware supports external LED indicators for robot state and movement direction.
+- **Heartbeat & Status:**
+  - `ONBOARD_LED`: Default Pico LED (Heartbeat every 500ms)
+  - `EXTRA_STATUS_LED`: Pin 27 (Mirrors onboard LED)
+- **LED Strip Relays (Directional Indicators):**
+  - `RELAY1` (Left Strip): Pin 20
+  - `RELAY2` (Right Strip): Pin 21
+  
+  *Relay Behavior based on kinematics:*
+  - **Idle:** Off
+  - **Forward:** Both solid ON
+  - **Backward:** Both flashing (warning mode)
+  - **Turning Left:** Left flashing, Right solid ON
+  - **Turning Right:** Right flashing, Left solid ON
+
 ## ROS 2 Integration Parameters
 You provided specific hardware values:
 * Left rear count: **~ 562**
