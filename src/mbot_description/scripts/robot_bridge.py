@@ -27,14 +27,14 @@ class RobotBridge(Node):
         # Physical dimensions extracted from mbot.xacro
         self.WHEEL_RADIUS = 0.061    # Meters (Z-offset of wheel joints)
         self.WHEEL_BASE = 0.235      # Meters (Distance between left and right wheels)
-        self.TICKS_PER_REV = 330.0   # Encoder ticks per revolution (Adjust for your motors)
+        self.TICKS_PER_REV = 660.0   # Encoder ticks per revolution (Commonly higher for gear motors)
         self.PID_RATE = 30.0         # Hz (Must match firmware PID loop frequency)
         
-        # Default PID Gains (Adjust via ROS parameters if needed)
-        self.KP = 20
-        self.KD = 12
+        # Aggressive PID Gains for more power
+        self.KP = 50
+        self.KD = 20
         self.KI = 0
-        self.KO = 50
+        self.KO = 80
         # ==========================================
 
         # Parameters (Can be set via launch files or 'ros2 param set')
