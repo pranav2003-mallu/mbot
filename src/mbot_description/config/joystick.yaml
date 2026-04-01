@@ -9,14 +9,14 @@ teleop_twist_joy_node:
     axis_linear:
       x: 1            # Left Stick Up/Down for Forward/Backward (Commonly Axis 1)
     scale_linear:
-      x: 0.5          # Max Forward/Backward speed (m/s)
+      x: 0.8          # Max Forward/Backward speed (m/s)
     scale_linear_turbo:
-      x: 1.0          # Max Boost speed (m/s)
+      x: 1.5          # Max Boost speed (m/s)
 
     axis_angular:
       yaw: 3          # Right Stick Left/Right for Steering (Commonly Axis 3)
     scale_angular:
-      yaw: 1.0        # Max Turning speed (rad/s)
+      yaw: 1.5        # Max Turning speed (rad/s)
 
     require_enable_button: false  # Removed deadman switch requirement
     # enable_button: 4        # Left Bumper (LB) to safely enable regular movement
