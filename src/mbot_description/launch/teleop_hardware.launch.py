@@ -35,6 +35,7 @@ def generate_launch_description():
         Node(
             package='mbot_description',
             executable='robot_bridge.py',
+            name='robot_bridge',
             parameters=[{'port_name': serial_port}],
             output='screen'
         ),
@@ -42,14 +43,7 @@ def generate_launch_description():
         Node(
             package='teleop_twist_keyboard',
             executable='teleop_twist_keyboard',
-            prefix='xterm -e',
-            output='screen'
-        ),
-
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            arguments=['-d', rviz_config],
+            name='keyboard_teleop',
             output='screen'
         ),
     ])
