@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="mbot_room">
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Outer Walls -->
+    <model name='outer_walls'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_north'>
+          <pose>5 0 0.5 0 0 0</pose>
+          <geometry><box><size>0.1 10 1</size></box></geometry>
+        </collision>
+        <visual name='visual_north'>
+          <pose>5 0 0.5 0 0 0</pose>
+          <geometry><box><size>0.1 10 1</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+
+        <collision name='collision_south'>
+          <pose>-5 0 0.5 0 0 0</pose>
+          <geometry><box><size>0.1 10 1</size></box></geometry>
+        </collision>
+        <visual name='visual_south'>
+          <pose>-5 0 0.5 0 0 0</pose>
+          <geometry><box><size>0.1 10 1</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+
+        <collision name='collision_east'>
+          <pose>0 5 0.5 0 0 0</pose>
+          <geometry><box><size>10 0.1 1</size></box></geometry>
+        </collision>
+        <visual name='visual_east'>
+          <pose>0 5 0.5 0 0 0</pose>
+          <geometry><box><size>10 0.1 1</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+
+        <collision name='collision_west'>
+          <pose>0 -5 0.5 0 0 0</pose>
+          <geometry><box><size>10 0.1 1</size></box></geometry>
+        </collision>
+        <visual name='visual_west'>
+          <pose>0 -5 0.5 0 0 0</pose>
+          <geometry><box><size>10 0.1 1</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Some Obstacles -->
+    <model name='obstacle_1'>
+      <pose>2 2 0.5 0 0 0</pose>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>1 1 1</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>1 1 1</size></box></geometry>
+          <material><script><name>Gazebo/Wood</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name='obstacle_2'>
+      <pose>-2 -2 0.5 0 0 0.78</pose>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>1.5 0.5 1</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>1.5 0.5 1</size></box></geometry>
+          <material><script><name>Gazebo/Bricks</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <physics type="ode">
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+  </world>
+</sdf>
