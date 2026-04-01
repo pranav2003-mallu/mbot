@@ -10,6 +10,7 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist, TransformStamped
+from sensor_msgs.msg import Joy
 from nav_msgs.msg import Odometry
 import serial
 import math
@@ -53,8 +54,13 @@ class RobotBridge(Node):
 
         # ROS 2 Pub/Sub
         self.create_subscription(Twist, '/cmd_vel', self.cmd_cb, 10)
+        self.create_subscription(Joy, '/joy', self.joy_cb, 10)
         self.odom_pub = self.create_publisher(Odometry, '/odom', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
+        
+        # Speed Scaling state
+        self.speed_multiplier = 1.0  # Range: 0.1 to 2.0
+        self.last_joy_button_state = [0, 0] # Up, Down
         
         # Odometry state
         self.x = 0.0
@@ -67,7 +73,8 @@ class RobotBridge(Node):
         # Polling loop for encoder data
         self.create_timer(1.0 / self.PID_RATE, self.odom_loop)
         self.get_logger().info(f"✅ Bridge Started on {self.port_name} at {self.baud_rate} baud.")
-        self.get_logger().info(f"🦾 Compatible with both Nano and Pico MDD20A firmware.")
+        self.get_logger().info(f"🚀 Speed Multiplier: {self.speed_multiplier*100}% (Use D-PAD UP/DOWN to adjust)")
+
 
     def parameter_callback(self, params):
         for param in params:
@@ -78,6 +85,25 @@ class RobotBridge(Node):
                     self.ser.close()
                 self.connect_serial()
         return SetParametersResult(successful=True)
+
+    def joy_cb(self, msg):
+        """Monitor D-PAD for speed multiplier (incremental control)"""
+        # Elite Ops / PS-style D-PAD is usually axes[7] (Up: 1, Down: -1)
+        # or buttons[13]/[14] depending on the joy node config.
+        # We'll check the POV (Axes 7 or similar)
+        if len(msg.axes) > 7:
+            up = 1 if msg.axes[7] > 0.5 else 0
+            down = 1 if msg.axes[7] < -0.5 else 0
+            
+            # Detect Button Press (Edge Detection)
+            if up and not self.last_joy_button_state[0]:
+                self.speed_multiplier = min(2.0, self.speed_multiplier + 0.1)
+                self.get_logger().info(f"🏎️ Speed Level: {int(self.speed_multiplier*100)}%")
+            if down and not self.last_joy_button_state[1]:
+                self.speed_multiplier = max(0.1, self.speed_multiplier - 0.1)
+                self.get_logger().info(f"🚲 Speed Level: {int(self.speed_multiplier*100)}%")
+                
+            self.last_joy_button_state = [up, down]
 
     def connect_serial(self):
         try:
@@ -94,8 +120,9 @@ class RobotBridge(Node):
                 pass
 
     def cmd_cb(self, msg):
-        v = msg.linear.x
-        w = msg.angular.z
+        # Apply the Global Speed Multiplier
+        v = msg.linear.x * self.speed_multiplier
+        w = msg.angular.z * self.speed_multiplier
         
         # Differential drive kinematics
         v_left = v - (w * self.WHEEL_BASE / 2.0)
