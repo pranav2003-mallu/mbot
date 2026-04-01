@@ -17,7 +17,7 @@ void leftEncoderISR() {
 void rightEncoderISR() {
   r_last = (r_last << 2) & 0x0F;
   r_last |= (digitalRead(RIGHT_ENC_PIN_A) << 1) | digitalRead(RIGHT_ENC_PIN_B);
-  r_enc_pos += Q_STATES[r_last];
+  r_enc_pos -= Q_STATES[r_last]; // Inverted based on README
 }
 
 void initEncoders() {

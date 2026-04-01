@@ -7,6 +7,7 @@
 <robot name="mbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:include filename="$(find mbot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find mbot_description)/urdf/mbot_gazebo.xacro" />
 
 <link name="base_footprint"/>
 <joint name="base_joint" type="fixed">

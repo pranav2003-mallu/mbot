@@ -60,7 +60,7 @@ def generate_launch_description():
         # 3. RPLidar
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(rplidar_pkg, 'launch', 'rplidar_a1_launch.py')),
-            launch_arguments={'serial_port': lidar_port, 'frame_id': 'laser'}.items()
+            launch_arguments={'serial_port': lidar_port, 'frame_id': 'lidar_1'}.items()
         ),
 
         # 4. Scan Filter (180 Crop) - Currently missing, commented out to prevent crash
